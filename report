@@ -1,0 +1,62 @@
+# Trade, Government Spending, Inflation and GDP per Capita  
+_Project Report_
+
+---
+
+## 1. Motivation
+
+This project investigates how a few core macroeconomic variables relate to a country’s level of economic development. In particular, I focus on:
+
+- **Trade openness** (trade as a share of GDP)  
+- **Government expenditure** (as a share of GDP)  
+- **Inflation** (consumer prices, annual %)  
+
+Textbook macroeconomics usually suggests that:
+
+- More open economies and low inflation are associated with higher income levels,  
+- The role of government spending is more ambiguous and context-dependent.
+
+The guiding question of this project is:
+
+> How are trade openness, government expenditure (% of GDP), and inflation associated with GDP per capita across countries and over time, and how well can simple machine-learning models predict GDP per capita from these macroeconomic indicators?
+
+The goal is **not** to claim causality. Instead, the aim is to build a transparent pipeline that goes from raw data download to exploratory analysis, hypothesis tests, and basic machine-learning models on a real-world panel dataset.
+
+---
+
+## 2. Data Source
+
+### 2.1 Main dataset
+
+- **Source:** Hugging Face Datasets  
+- **Dataset slug:** `tripathyShaswata/GDP-Per-Capita_Gov-Expenditure_Trade`  
+- **Unit of observation:** Country–year
+
+**Variables used in this project**
+
+- `Entity` – country or region name  
+- `Code` – country code  
+- `Year`  
+- `GDP per capita`  
+- `Government expenditure (% of GDP)`  
+- `Trade as a Share of GDP`  
+- `Inflation, consumer prices (annual %)`  
+
+The dataset combines these series from World Bank–type sources into a single panel, so I can work with one CSV file instead of manually merging multiple sources.
+
+### 2.2 Data collection process
+
+Raw data are **not** committed to the repository. Instead, I use a small Python script:
+
+- `download_data.py`
+
+This script:
+
+1. Downloads the CSV from the Hugging Face raw URL,  
+2. Saves it locally as `gdp_per_capita.csv` (in a data directory that is ignored by git),  
+3. Prints the shape and a short preview for basic sanity checks.
+
+Anyone who clones the repository can reproduce the raw data by running:
+
+```bash
+python download_data.py
